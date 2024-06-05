@@ -67,7 +67,7 @@ const MyForm = ({handleSubmit}) => {
     if (!formData.amount.trim()) {
       newErrors.amount = 'Amount is required';
     } else if (!/^\d+(\.\d{1,2})?$/.test(formData.amount.trim())) {
-      newErrors.amount = 'Invalid amount';
+      newErrors.amount = 'Invalid amount / Remove Special Characters';
     }
 
     setErrors(newErrors);

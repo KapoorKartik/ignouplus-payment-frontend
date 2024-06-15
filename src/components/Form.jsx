@@ -14,12 +14,36 @@ const MyForm = ({handleSubmit}) => {
 
   const [errors, setErrors] = useState({});
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     const { name, value } = e.target;
+    let err = false;
+    if (name === 'amount') {
+      // Only allow numbers for amount
+      if (!/^\d*$/.test(value)) {
+        err = true;
+      }
+    } else if (name === 'pincode') {
+      // Only allow 6 digits for pincode
+      if (!/^\d{0,6}$/.test(value)) {
+        err = true;
+      }
+    } else if (name === 'mobile') {
+      // Only allow 10 digits for mobile number
+      if (!/^\d{0,10}$/.test(value)) {
+        err = true;
+      }
+    } else if (name === 'name') {
+      // only allow first middle and last name
+      let nameArr = value.split(' ');
+      if (nameArr.length > 3) {
+        err = true;
+      }
+    }
+    if (err) return;
+
     setFormData({ ...formData, [name]: value });
-    // Clear errors when user starts typing
-    setErrors({ ...errors, [name]: '' });
   };
+
 
   const validateForm = () => {
     const newErrors = {};
@@ -131,12 +155,16 @@ const MyForm = ({handleSubmit}) => {
   ];
 
   return (
-      <form onSubmit={handleSubmitChild}>
-        <div className="mb-3">
-          <label htmlFor="amount" className="form-label">Amount</label>
-          <input type="text" className="form-control" id="amount" name="amount" value={formData.amount} onChange={handleChange} />
-          {errors.amount && <div className="text-danger">{errors.amount}</div>}
+    <form onSubmit={handleSubmitChild}>
+      <div className='mb-3'>
+
+        <label htmlFor='amount' className='form-label'> Amount </label>
+        <div className='input-group'>
+          <span className='input-group-text' id='basic-addon1'> ₹ </span>
+          <input type='text' className='form-control' id='amount' name='amount' value={formData.amount} onChange={handleChange} />
         </div>
+      </div>
+      
         <div className="mb-3">
           <label htmlFor="product" className="form-label">Product</label>
           <select className="form-select" id="product" name="product" value={formData.product} onChange={handleChange}>
@@ -145,49 +173,49 @@ const MyForm = ({handleSubmit}) => {
           </select>
           {errors.product && <div className="text-danger">{errors.product}</div>}
         </div>
-        
+
         <div className="mb-3">
           <label htmlFor="name" className="form-label">Name</label>
           <input type="text" className="form-control" id="name" name="name" value={formData.name} onChange={handleChange} />
           {errors.name && <div className="text-danger">{errors.name}</div>}
-        </div>
+      </div>
         <div className="mb-3">
           <label htmlFor="mobile" className="form-label">Mobile Number</label>
           <input type="text" className="form-control" id="mobile" name="mobile" value={formData.mobile} onChange={handleChange} />
           {errors.mobile && <div className="text-danger">{errors.mobile}</div>}
-        </div>
+      </div>
         <div className="mb-3">
           <label htmlFor="email" className="form-label">Email Address</label>
           <input type="email" className="form-control" id="email" name="email" value={formData.email} onChange={handleChange} />
           {errors.email && <div className="text-danger">{errors.email}</div>}
-        </div>
+      </div>
         <div className="mb-3">
           <label htmlFor="address" className="form-label">Address</label>
           <textarea className="form-control" id="address" name="address" value={formData.address} onChange={handleChange}></textarea>
           {errors.address && <div className="text-danger">{errors.address}</div>}
-        </div>
+      </div>
         <div className="mb-3">
           <label htmlFor="pincode" className="form-label">Pincode</label>
           <input type="text" className="form-control"  id="pincode" name="pincode" value={formData.pincode} onChange={handleChange} />
           {errors.pincode && <div className="text-danger">{errors.pincode}</div>}
-        </div>
+      </div>
         <div className="mb-3">
           <label htmlFor="state" className="form-label">State</label>
           <select className="form-select" id="state" name="state" value={formData.state} onChange={handleChange}>
             <option value="">Select State/UT</option>
-            {statesAndUTs.map((state, index) => (
+          {statesAndUTs.map((state, index) => (
               <option key={index} value={state}>{state}</option>
-            ))}
-          </select>
+          ))}
+        </select>
           {errors.state && <div className="text-danger">{errors.state}</div>}
-        </div>
+      </div>
           
 
-        <div className=''>
+      <div className=''>
         <button type="submit" className="btn btn-primary w-50" disabled={disable} >Pay ₹ {formData.amount || "0"}</button>
         <img id="fin-logo" alt="pay-methods" src="https://cdn.razorpay.com/static/assets/pay_methods_branding.png" width="180"/>
-        </div>
-      </form>
+      </div>
+    </form>
   );
 };
 

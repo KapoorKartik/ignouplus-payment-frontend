@@ -2,6 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Homepage = () => {
+  let customeLink = {
+    textDecoration: 'none',
+    color: '#528ff0',
+  };
   return (
     <>
       <div className='container-fluid bg-light'>
@@ -14,8 +18,8 @@ const Homepage = () => {
                 Pay for IGNOUPLUS Products
               </h1>
               <p className='text-muted'>
-                50,000+ User and Trusts
-                <a href='https://ignouplus.com/app' target='_blank'>
+                50,000+ User and Trusts &nbsp;
+                <a href='https://ignouplus.com/app' target='_blank' style={customeLink} >
                   IGNOUPLUS App
                 </a>
               </p>
@@ -44,8 +48,8 @@ const Homepage = () => {
                     </li>
                     <li className='list-group-item-action'>
                       Need any help regarding Study Related Material Contact us
-                      on
-                      <a href='https://ignouplus.com/whatsapp' target='_blank'>
+                      on &nbsp;
+                      <a href='https://ignouplus.com/whatsapp' target='_blank' style={customeLink}>
                         9317126842
                       </a>
                     </li>
@@ -79,7 +83,8 @@ const Homepage = () => {
                   <a
                     href='mailto:officialignouplus@gmail.com?subject=Query for Payment Page'
                     target='_blank'
-                    rel='noopener noreferrer'>
+                    rel='noopener noreferrer'
+                    style={customeLink}>
                     <div>
                       <svg
                         viewBox='0 0 24 24'
@@ -107,7 +112,7 @@ const Homepage = () => {
                 </div>
 
                 <div className='sub-detail'>
-                  <a href='tel:9317126842'>
+                  <a href='tel:9317126842' style={customeLink}>
                     <div>
                       <svg
                         viewBox='0 0 24 24'
@@ -150,7 +155,8 @@ const Homepage = () => {
                   <a
                     href='https://store.ignouplus.com/terms-and-conditions/'
                     target='_blank'
-                    rel='noopener noreferrer'>
+                    rel='noopener noreferrer' 
+                    style={customeLink}>
                     <div>https://store.ignouplus.com/terms-and-conditions/</div>
                   </a>
                   <p>
